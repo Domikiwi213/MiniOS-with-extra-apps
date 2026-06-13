@@ -1,131 +1,346 @@
 
-# MiniOS
+<p align="center">
+  <img
+    width="512"
+    height="128"
+    alt="MiniOS logo"
+    src="https://github.com/codefl0w/MiniOS/blob/main/github_res/MiniOS_Logo.png"
+  />
+</p>
+
+<p align="center">
+  MiniOS is a small Flask app drawer for low-end feature-phone browsers.<br>
+  It aims to connect feature phones to usual everyday websites without compromising the "dumbphone" aspect.
+  
+</p>
+<p align="center">
+  <img
+    alt="MiniOS Version"
+    src="https://codefl0w.xyz/gh-boards/out/codefl0w/profile/badge_custom_2.svg"
+  />
 
 
-MiniOS is a small Flask app drawer for low-end feature-phone browsers. It aims to connect feature phones to usual everyday websites without compromising the "dumbphone" aspect.
+## Table of Contents
 
+* [Run](#run)
+* [Hosting](#hosting)
+
+  * [PythonAnywhere](#pythonanywhere)
+  * [Render](#render)
+  * [Railway](#railway)
+  * [Vercel](#vercel)
+  * [Other hosts](#other-hosts)
+* [.env](#env)
+
+  * [Minigram](#minigram)
+  * [AI](#ai)
+  * [Gmail](#gmail)
+* [Settings](#settings)
+* [Apps](#apps)
+* [Extras](#extras)
 
 ## Run
 
-  To host your own MiniOS configuration and access it anywhere, the best way is to run the Flask server on a Python service. Render or Railway would suffice but the best service is PythonAnywhere since it's completely free.
+To host your own MiniOS configuration and access it anywhere, the best way is to run the Flask server on a Python hosting service.
 
-To set up MiniOS, clone or download the repository contents into PythonAnywhere and make sure PythonAnywhere is configured to run `main.py`.
+PythonAnywhere is the easiest option for a simple free setup as MiniOS doesn't even come close to filling up the free quota. It also doesn't have coldstart or any other downsides aside from asking you to renew your site once a month.
 
+ Render or Railway can also work well, especially if you prefer GitHub-based deployment.
 
-For local tests, run the script on your machine and view it at:
+For local testing, clone or download the repository and install the required packages:
 
-```text
-
-http://127.0.0.1:2000/
-
+```bash
+pip install -r requirements.txt
 ```
 
-  
+Then run:
+
+```bash
+python main.py
+```
+
+Open MiniOS at:
+
+```text
+http://127.0.0.1:2000/
+```
+
+If you use a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+On Linux/macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+On Windows:
+
+```bat
+.venv\Scripts\activate
+```
+
+Then install dependencies and run MiniOS:
+
+```bash
+pip install -r requirements.txt
+python main.py
+```
+
+## Hosting
+
+MiniOS is a Flask app, so it needs a host that can run Python web apps.
+
+Good options:
+
+| Host           | Status      | Notes                                                                |
+| -------------- | ----------- | -------------------------------------------------------------------- |
+| PythonAnywhere | Recommended | Simple Flask hosting, good for personal MiniOS instances. Doesn't have native .env support.            |
+| Render         | Partial        | Easy GitHub deployment. Free services will sleep after inactivity.                     |
+| Railway        | Good        | Easy GitHub deployment and environment variables. Limits are not ideal. |
+| Fly.io         | Good        | More technical, but suitable for small Flask apps.                   |
+| Koyeb          | Good        | Can run Python web services.                                         |
+| Replit         | Partial     | Fine for testing, less ideal for permanent hosting.                  |
+| Vercel         | Limited     | Possible only with serverless adaptation. Not the default path.      |
+| Netlify        | Limited     | Better for static sites. Not recommended for normal Flask hosting.   |
+| VPS            | Good        | Best control, but requires manual server setup.                      |
+
+### PythonAnywhere
+
+PythonAnywhere is the most straightforward host for MiniOS.
+
+Basic setup:
+
+1. Create a PythonAnywhere account.
+2. Create a web app. Make sure it's named `main.py`, not `flask_app.py`.
+3. Navigate to your files, where you see `main.py`. Upload all MiniOS scripts and icons. Make sure you don't change the project structure.
+4. Navigate to the **Web** section and reload your site.
+
+
+You can then use your personal MiniOS on your phone. Keep in mind that environment variables only reload once per site reload, so you must reload your website on PythonAnywhere again if you change your variables.
+
+
+
+### Render
+
+Render can deploy MiniOS directly from a GitHub repository.
+
+Typical setup:
+
+```text
+Runtime: Python
+Build command: pip install -r requirements.txt
+Start command: python main.py
+```
+
+
+Render supports environment variables to be injected directly on the web, so you don't need to fill your .env file. You can create the variables and fill them in:
+
+```text
+BOT_TOKEN
+ME_ID
+GEMINI_API_KEY
+MAIL_USERNAME
+MAIL_PASSWORD
+MAIL_FROM
+```
+
+
+### Railway
+
+Railway can run MiniOS as a Python web app.
+
+Typical setup:
+
+```text
+Build command: pip install -r requirements.txt
+Start command: python main.py
+`````
+
+Use Railway variables for secrets instead of committing `.env`, same as Render above.
+
+
+### Vercel
+
+Vercel is not recommended for the default MiniOS setup.
+
+MiniOS is a Flask app. Vercel mainly uses serverless functions, so the project would need adaptation before it can run there properly.
+
+Use Vercel only if you specifically want to convert MiniOS into a serverless-compatible app.
+
+
+### Other hosts
+
+Other possible options:
+
+* Fly.io
+* Koyeb
+* Replit
+* Glitch
+* A small VPS
+* A home server
+* A home server behind Cloudflare Tunnel
+* A Raspberry Pi or similar device
+
+For the simplest setup, use PythonAnywhere.
+
+For GitHub-based deployment, use Render or Railway.
+
+For full control, use a VPS.
 
 ## .env
 
-  
-
-Do not put secrets in `settings.json`. Copy `.env.example` to `.env` and fill values.
-
-  
+ For your API keys and Gmail password, copy `.env.example` to `.env` and fill values.
 
 MiniOS loads `.env` from the same folder as `main.py`, then injects values into `os.environ` before app modules read config. This works on hosts where normal environment variables are not available. On Render or Railway, you can use their own environment secrets section instead.
 
-  
-
 `.env` format:
 
-  
-
 ```text
-
 KEY=value
-
 MAIL_PASSWORD=xxxx xxxx xxxx xxxx
-
 ```
 
-  
+Do not share `.env` publicly.
+
+Do not commit `.env` to a public repository.
 
 **Minigram:**
 
-Minigram is a bot bridge that connects you to Telegram. Use Telegram's official BotFather app to create a bot, then copy its token and paste it into your .env file.
- 
-```text
+Minigram is a bot bridge that connects you to Telegram. Use Telegram's official BotFather app to create a bot, then copy its token and paste it into your `.env` file.
 
+```text
 BOT_TOKEN=                         # Your bot's token. Do NOT share this publicly!
 ME_ID=                             # Your user ID. Find it by running the @userinfobot on Telegram
 MINIGRAM_ENABLE_ADMIN_ROUTES=1     # Must be enabled for proper webhook setup. Can be set to 0 after successful setup.
-                                       
-
 ```
-To set up the bot bridge, navigate to {URL}/set_webhook to connect to your bot. You can check the connection any time at /webhook_info.
-  
+
+To set up the bot bridge, navigate to:
+
+```text
+{URL}/set_webhook
+```
+
+You can check the connection any time at:
+
+```text
+{URL}/webhook_info
+```
+
 Using a bot has caveats. For example, the receiver must start a chat with your bot first, so your bot doesn't get treated as a blocked user. This is a one-time setup for each receiver.
 
-Bots need user IDs to work. You can view IDs either via the @userinfobot or from a Telegram chat link:
+Bots need user IDs to work. You can view IDs either via the `@userinfobot` or from a Telegram chat link:
 
-    https://web.telegram.org/a/#1234567
+```text
+https://web.telegram.org/a/#1234567
+```
 
 The number at the end is the user ID. It doesn't have to be 7 digits.
 
-**AI:**
-
-  
+After the webhook is configured, you can disable admin routes:
 
 ```text
-
-GEMINI_API_KEY=                   # You can generate a free key at Google AI Studio.
-GEMINI_MODEL=gemini-3.5-flash     # Default free model. Change if you have Pro.
-
+MINIGRAM_ENABLE_ADMIN_ROUTES=0
 ```
 
-  
+**AI:**
+
+```text
+GEMINI_API_KEY=                   # You can generate a free key at Google AI Studio.
+GEMINI_MODEL=gemini-3.5-flash     # Default free model. Change if you have Pro.
+```
 
 **Gmail:**
 
-  
-
 ```text
-
 MAIL_USERNAME=      # Your mail address
 MAIL_PASSWORD=      # 16-digit Gmail App Login code. Generate one: https://support.google.com/mail/answer/185833
 MAIL_FROM=          # Optional for sending. Use your mail address if you'll fill it.
-
 ```
 
-  
+Use a Gmail App Password, not your normal Gmail password.
 
 ## Settings
 
-  
-
 Use `/settings` for non-secret app settings:
 
-  
+* Weather location and coordinates
+* Minigram contacts and timestamp settings
+* Finance currency
+* Boards subreddit list
+* News defaults
+* Gmail limit and cache TTL
 
--  Weather location and coordinates
+Settings are stored in `settings.json`.
 
--  Minigram contacts and timestamp settings
+Do not store passwords, tokens, API keys, mail credentials, or bot secrets in `settings.json`.
 
--  Finance currency
+## Apps
 
--  Boards subreddit list
+MiniOS currently has these apps, with the following functionalities:
 
--  News defaults
+### Minigram
 
--  Gmail limit and cache TTL
+Minimal Telegram web client. 
 
-  
+|Action|  Support| Description |
+|--|--| -- |
+| Send messages | ✅ |
+| Receive messages | ✅ |
+| Send Emojis|✅  | Minigram has an ASCII-to-Emoji conversion feature. When you send "<3", the receiver sees a "❤️" instead.
+| Receive Emojis| ✅ | The same feature works the other way too. See all supported emojis below.
+| Send pictures| ❌| 
+| Receive pictures| ✅ | Minigram can download the pictures, downscale them and display them in the chat UI directly.
+| Send stickers| ❌ | 
+| Receive stickers| ❌ | Could change in future updates.
 
-Settings are stored in `settings.json`. 
 
-### Extras
+
+
+
+### Weather
+
+Simple weather app based on Open-Meteo metrics. Shows the current and oncoming weather, as well as extra information such as pressure, humidity etc.
+
+Temperature can be displayed in either celcius or fahrenheit. You can change this from the settings app any time.
+
+### Notes
+
+Simple notes app. Supports saving infinite notes.
+
+### AI
+
+Simple AI chat based on Google Gemini. Supports sending and receiving plain text.
+
+Gemini's responses will be short and plain, based on the system prompt send by the AI script.
+
+### Finance
+
+Simple app to track your spendings. Supports changing the currency from the settings.
+
+### Boards
+
+RSS-based Reddit reader. Supports displaying posts with text and pictures. Listed communities can be changed from the settings app.
+
+### News
+
+RSS-based Google News app. Shows short descriptions of news, but full reader isn't ready yet.
+
+Default topic or language can be changed from the settings app.
+
+### Gmail
+
+Simple Gmail app. Supports viewing and sending mails. Since Google responds slowly, mails will be cached instead of being reloaded each time.
+
+Cache expiry time and maximum shown mail count can be changed from the settings app.
+
+## Extras
 
 Enjoy my work? Please consider a small donation!
 
 <a href="https://buymeacoffee.com/fl0w" target="_blank" rel="noopener noreferrer">
   <img width="350" alt="yellow-button" src="https://github.com/user-attachments/assets/2e6d44c8-9640-4cb3-bcc8-989595d6b7e9"/>
 </a>
-
