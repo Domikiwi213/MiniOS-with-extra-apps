@@ -16,9 +16,9 @@ from settings import app_settings
 from ui import h, phone_page
 
 # ---- Configuration ----
-DEFAULT_LOCATION_NAME = "Dursunlu"
-DEFAULT_LATITUDE = 36.16736
-DEFAULT_LONGITUDE = 36.15788
+DEFAULT_LOCATION_NAME = "Random, change in settings"
+DEFAULT_LATITUDE = 16.16736
+DEFAULT_LONGITUDE = 16.15788
 DEFAULT_TIMEZONE = "Europe/Istanbul"
 DEFAULT_TEMPERATURE_UNIT = "celsius"
 CACHE_TTL = int(os.environ.get("WEATHER_CACHE_TTL", "900"))

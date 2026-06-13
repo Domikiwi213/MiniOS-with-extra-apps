@@ -17,18 +17,20 @@ from settings import app_settings
 from ui import h, phone_page
 
 DEFAULT_SUBREDDITS = [
-    "4chan",
-    "fightporn",
-    "greentext",
-    "itrunsdoom",
-    "PSVitaHomebrew",
-    "vita",
-    "vitahacks",
-    "vitapiracy",
+    "dumbphones",
+    "blank",
+    "blank",
+    "blank",
+    "blank",
+    "blank",
+    "blank",
+    "blank",
+    "blank",
+    "blank",
 ]
 SORTS = ["hot", "new", "top"]
 CACHE_TTL = int(os.environ.get("BOARDS_CACHE_TTL", "600"))
-USER_AGENT = os.environ.get("BOARDS_USER_AGENT", "ProjectTCL/0.1 personal feature-phone RSS reader")
+USER_AGENT = os.environ.get("BOARDS_USER_AGENT", "MiniOS/0.1 personal feature-phone RSS reader")
 BASE_URL = "https://www.reddit.com/r/{sub}/{sort}/.rss"
 NS = {"a": "http://www.w3.org/2005/Atom", "m": "http://search.yahoo.com/mrss/"}
 
