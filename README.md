@@ -24,7 +24,7 @@
 
 * [Run](#run)
 * [Hosting](#hosting)
-
+  * [Security ⚠️](#security)
   * [PythonAnywhere](#pythonanywhere)
   * [Render](#render)
   * [Railway](#railway)
@@ -106,6 +106,10 @@ Good options:
 | Vercel         | Limited     | Possible only with serverless adaptation. Not the default path.      |
 | Netlify        | Limited     | Better for static sites. Not recommended for normal Flask hosting.   |
 | VPS            | Good        | Best control, but requires manual server setup.                      |
+
+### Security
+
+Please be aware that MiniOS doesn't have any authentication system built in. Make sure you don't expose your host link or set up a login form on your host if they support it. PythonAnywhere is still the best choice for this.
 
 ### PythonAnywhere
 
